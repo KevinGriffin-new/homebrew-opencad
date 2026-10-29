@@ -6,6 +6,7 @@ Apple Silicon only.
 
 ```sh
 brew tap kevingriffin-new/opencad
+brew trust --tap kevingriffin-new/opencad   # Homebrew 7+ asks before loading third-party taps
 brew install --cask opencad-landsurvey   # installs OpenCADStudio too
 ```
 

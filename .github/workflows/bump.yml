@@ -58,6 +58,7 @@ jobs:
             exit 0
           fi
           brew tap kevingriffin-new/opencad "$GITHUB_WORKSPACE"
+          brew trust --tap kevingriffin-new/opencad
           brew style --cask kevingriffin-new/opencad/opencadstudio kevingriffin-new/opencad/opencad-landsurvey
           brew audit --cask --online kevingriffin-new/opencad/opencadstudio kevingriffin-new/opencad/opencad-landsurvey
           brew fetch --cask kevingriffin-new/opencad/opencadstudio kevingriffin-new/opencad/opencad-landsurvey
