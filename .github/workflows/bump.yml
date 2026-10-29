@@ -50,29 +50,36 @@ jobs:
       - name: Check the casks agree
         run: python3 scripts/bump.py --check
 
-      - name: Audit
+      # Commit before auditing: `brew tap <path>` clones the repo, so it only
+      # sees committed casks. Push only after the audit passes.
+      - name: Commit locally
+        id: commit
         run: |
           set -euo pipefail
           if git diff --quiet; then
             echo "casks unchanged"
             exit 0
           fi
-          brew tap kevingriffin-new/opencad "$GITHUB_WORKSPACE"
-          brew trust --tap kevingriffin-new/opencad
-          brew style --cask kevingriffin-new/opencad/opencadstudio kevingriffin-new/opencad/opencad-landsurvey
-          brew audit --cask --online kevingriffin-new/opencad/opencadstudio kevingriffin-new/opencad/opencad-landsurvey
-          brew fetch --cask kevingriffin-new/opencad/opencadstudio kevingriffin-new/opencad/opencad-landsurvey
-
-      - name: Commit
-        run: |
-          set -euo pipefail
-          if git diff --quiet; then exit 0; fi
           v=$(sed -n 's/^  version "\(.*\)"/\1/p' Casks/opencad-landsurvey.rb)
           h=$(sed -n 's/^  version "\(.*\)"/\1/p' Casks/opencadstudio.rb)
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "opencad-landsurvey $v, opencadstudio $h"
-          git push
+          git commit -qam "opencad-landsurvey $v, opencadstudio $h"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Audit
+        if: steps.commit.outputs.changed == 'true'
+        run: |
+          set -euo pipefail
+          brew tap kevingriffin-new/opencad "$GITHUB_WORKSPACE"
+          brew trust --tap kevingriffin-new/opencad
+          casks="kevingriffin-new/opencad/opencadstudio kevingriffin-new/opencad/opencad-landsurvey"
+          brew style --cask $casks
+          brew audit --cask --online $casks
+
+      - name: Push
+        if: steps.commit.outputs.changed == 'true'
+        run: git push
 
       - name: Report failure
         if: failure()
