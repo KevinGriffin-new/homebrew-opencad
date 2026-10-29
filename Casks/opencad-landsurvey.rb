@@ -1,6 +1,6 @@
 cask "opencad-landsurvey" do
   version "0.4.25"
-  sha256 "ca5ca1e2770048a05eca7c55c0c0d7549fb3d7e05b80fe3eefb2e30123cef5cc"
+  sha256 "0000000000000000000000000000000000000000000000000000000000000000"
 
   url "https://github.com/KevinGriffin-new/opencad-landsurvey-plugin/releases/download/v#{version}/opencad.landsurvey-macos-aarch64.tar.gz"
   name "Land Survey for OpenCADStudio"
