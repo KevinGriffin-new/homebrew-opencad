@@ -28,10 +28,18 @@ plugin has been re-pinned to it, which is usually within hours.
 
 ## Already installed by hand?
 
-- App already in `/Applications`: `brew install --cask --adopt opencadstudio`
+Homebrew refuses to overwrite files it didn't install ("It seems there is
+already an App at …"), so install the host cask on its own first. Options such
+as `--force` apply only to the cask you name, not to the dependency.
+
+- App already in `/Applications`: if it is the same version as the cask,
+  `brew install --cask --adopt opencadstudio`. If not, quit it and
+  `brew install --cask --force opencadstudio` to replace it.
 - Plugin already installed from the Plugin Manager: remove
   `~/Library/Application Support/OpenCADStudio/plugins/opencad.landsurvey`
-  first, or `brew install --cask --force opencad-landsurvey`.
+  first, or `brew install --cask --force opencad-landsurvey`. Other plugins in
+  that folder are left alone, but they must also be built for the cask's
+  OpenCADStudio version to load.
 
 If you later update the plugin from the Plugin Manager, Homebrew's record
 goes stale. `brew reinstall --cask opencad-landsurvey` resyncs it.
