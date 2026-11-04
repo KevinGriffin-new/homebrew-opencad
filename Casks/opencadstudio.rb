@@ -1,8 +1,8 @@
 cask "opencadstudio" do
   # Bumped only by scripts/bump.py, together with opencad-landsurvey: the plugin
   # loads in exactly one host build, so the host must never run ahead of it.
-  version "2026.43"
-  sha256 "d9a4aa40c5c83852e103a1ef2e9eb711d89fef57582fd195d25588f4649ada0f"
+  version "2026.44"
+  sha256 "26939f85a4d7009c269475f2e0a278af7f827d26ee6a5bea355062ac843c53a9"
 
   url "https://github.com/KevinGriffin-new/OpenCADStudio/releases/download/v#{version}-signed/OpenCADStudio-v#{version}-macos-arm64-signed.dmg"
   name "OpenCADStudio"

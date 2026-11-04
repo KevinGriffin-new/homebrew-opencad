@@ -1,6 +1,6 @@
 cask "opencad-landsurvey" do
-  version "0.4.25"
-  sha256 "ca5ca1e2770048a05eca7c55c0c0d7549fb3d7e05b80fe3eefb2e30123cef5cc"
+  version "0.4.26"
+  sha256 "6a94c3a53db00d1f8794e274c1bb12d01547e16fd7d3f3dcc0f902fa4e85a408"
 
   url "https://github.com/KevinGriffin-new/opencad-landsurvey-plugin/releases/download/v#{version}/opencad.landsurvey-macos-aarch64.tar.gz"
   name "Land Survey for OpenCADStudio"
@@ -20,7 +20,7 @@ cask "opencad-landsurvey" do
            target: "~/Library/Application Support/OpenCADStudio/plugins/opencad.landsurvey"
 
   caveats <<~EOS
-    Built for OpenCADStudio 2026.43 exactly; other host versions refuse it.
+    Built for OpenCADStudio 2026.44 exactly; other host versions refuse it.
     Upgrade both together with `brew upgrade --cask opencad-landsurvey`.
 
     If you also update the plugin from OpenCADStudio's Plugin Manager, Homebrew
